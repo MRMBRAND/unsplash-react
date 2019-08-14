@@ -310,6 +310,9 @@ export default class UnsplashPicker extends React.Component {
             Unsplash
           </a>
         </span>
+        <div>
+          <DropDownSelector />
+        </div>
         <div
           className="d-f"
           style={{
