@@ -41,6 +41,7 @@ export default class UnsplashPicker extends React.Component {
     defaultSearch: string,
     highlightColor: string,
     onFinishedUploading: func,
+    onSelectPhoto: func,
     photoRatio: number,
     preferredSize: shape({
       width: number.isRequired,
@@ -56,6 +57,7 @@ export default class UnsplashPicker extends React.Component {
     defaultSearch: "",
     highlightColor: "#00adf0",
     onFinishedUploading: noop,
+    onSelectPhoto: noop,
     photoRatio: 1.5,
     preferredSize: null,
     Uploader: Base64Uploader,
@@ -64,6 +66,8 @@ export default class UnsplashPicker extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.onSelectPhotoIsDefined = this.props.onSelectPhoto !== noop
 
     this.state = {
       unsplash: null,
@@ -210,13 +214,17 @@ export default class UnsplashPicker extends React.Component {
   };
 
   handlePhotoClick = photo => {
-    this.setState({ selectedPhoto: photo });
-  };
+    this.setState({ selectedPhoto: photo }, () => {
+      this.props.onSelectPhoto(photo)
+    })
+  }
 
   handleFinishedUploading = response => {
-    this.setState({ loadingPhoto: null });
-    this.props.onFinishedUploading(response);
-  };
+    if (!this.onSelectPhotoIsDefined) {
+      this.setState({ loadingPhoto: null })
+    }
+    this.props.onFinishedUploading(response)
+  }
 
   handleSearchResultsBottomIntersectionChange = isAtBottomOfSearchResults => {
     this.setState({ isAtBottomOfSearchResults });
