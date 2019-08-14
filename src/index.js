@@ -46,6 +46,7 @@ export default class UnsplashPicker extends React.Component {
       width: number.isRequired,
       height: number.isRequired,
     }),
+    displayPortraitPhotos: bool,
     Uploader: func,
     __debug_chaosMonkey: bool,
   }
@@ -236,7 +237,7 @@ export default class UnsplashPicker extends React.Component {
   }
 
   render() {
-    const { Uploader, columns: searchResultColumns, photoRatio, highlightColor } = this.props
+    const { Uploader, columns: searchResultColumns, photoRatio, highlightColor, } = this.props
     const {
       photos,
       search,
@@ -253,6 +254,15 @@ export default class UnsplashPicker extends React.Component {
       ? Math.floor(searchResultsWidth / searchResultColumns)
       : 100
     const searchResultHeight = searchResultWidth / photoRatio
+
+    const displayPortraitPhotos = true;
+
+    if(displayPortraitPhotos) {
+      const portraits = photos.filter((photo) => photo.width < photo.height);
+      this.setState({
+        photos: portraits,
+      }); 
+    }
 
     return (
       <ReactIntersectionObserver
