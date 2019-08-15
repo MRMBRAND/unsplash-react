@@ -8,6 +8,7 @@ var React = _interopDefault(require('react'));
 var Unsplash = _interopDefault(require('unsplash-js'));
 var propTypes = _interopDefault(require('prop-types'));
 var Spinner = _interopDefault(require('react-svg-spinner'));
+var DropDownSelector = _interopDefault(require('.dropDownSelector'));
 require('intersection-observer');
 
 var classCallCheck = function (instance, Constructor) {

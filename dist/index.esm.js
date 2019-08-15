@@ -2,6 +2,7 @@ import React from 'react';
 import Unsplash from 'unsplash-js';
 import propTypes from 'prop-types';
 import Spinner from 'react-svg-spinner';
+import DropDownSelector from '.dropDownSelector';
 import 'intersection-observer';
 
 var classCallCheck = function (instance, Constructor) {

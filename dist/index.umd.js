@@ -1,8 +1,10 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.UnsplashReact = {})));
-}(this, (function (exports) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('.dropDownSelector')) :
+	typeof define === 'function' && define.amd ? define(['exports', '.dropDownSelector'], factory) :
+	(factory((global.UnsplashReact = {}),global.DropDownSelector));
+}(this, (function (exports,DropDownSelector) { 'use strict';
+
+	DropDownSelector = DropDownSelector && DropDownSelector.hasOwnProperty('default') ? DropDownSelector['default'] : DropDownSelector;
 
 	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
