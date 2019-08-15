@@ -245,10 +245,21 @@ export default class UnsplashPicker extends React.Component {
     return this.totalResults > this.resultsPerPage * this.state.page
   }
 
+  getFilteredList(photos, filter) {
+    switch(filter){
+      case 'All':
+        return photos;
+      case 'Portrait':
+        return photos.filter(photo => photo.width < photo.height)
+      case 'Landscape': 
+        photos.filter(photo => photo.width > photo.height)
+      default:
+        return photos;
+    }
+  }
   render() {
     const { Uploader, columns: searchResultColumns, photoRatio, highlightColor, searchFilter } = this.props
     const {
-      photos,
       search,
       selectedPhoto,
       loadingPhoto,
@@ -259,6 +270,7 @@ export default class UnsplashPicker extends React.Component {
       error,
     } = this.state
 
+    let { photos } = this.state;
     const searchResultWidth = searchResultsWidth
       ? Math.floor(searchResultsWidth / searchResultColumns)
       : 100
@@ -266,6 +278,7 @@ export default class UnsplashPicker extends React.Component {
 
     console.log("UNsplash API: " + searchFilter);
 
+    photos = this.getFilteredList(photos, searchFilter);
     return (
       <ReactIntersectionObserver
         onIntersectionChange={this.recalculateSearchResultsWidth}
