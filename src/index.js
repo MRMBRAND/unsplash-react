@@ -252,7 +252,7 @@ export default class UnsplashPicker extends React.Component {
       case 'Portrait':
         return photos.filter(photo => photo.width < photo.height)
       case 'Landscape': 
-        photos.filter(photo => photo.width > photo.height)
+        return photos.filter(photo => photo.height < photo.width)
       default:
         return photos;
     }
