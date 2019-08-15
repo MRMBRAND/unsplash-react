@@ -264,7 +264,8 @@ export default class UnsplashPicker extends React.Component {
       : 100
     const searchResultHeight = searchResultWidth / photoRatio
 
-    console.log(searchFilter);
+    console.log("UNsplash API: " + searchFilter);
+
     return (
       <ReactIntersectionObserver
         onIntersectionChange={this.recalculateSearchResultsWidth}
