@@ -925,7 +925,9 @@ var UnsplashPicker = function (_React$Component) {
     var _this = possibleConstructorReturn(this, (UnsplashPicker.__proto__ || Object.getPrototypeOf(UnsplashPicker)).call(this, props));
 
     _this.recalculateSearchResultsWidth = throttle(50, function () {
-      _this.setState({ searchResultsWidth: _this.searchResults.getBoundingClientRect().width });
+      _this.setState({
+        searchResultsWidth: _this.searchResults.getBoundingClientRect().width
+      });
     });
 
     _this.loadDefault = function () {
@@ -1037,7 +1039,6 @@ var UnsplashPicker = function (_React$Component) {
       if (!_this.onSelectPhotoIsDefined) {
         _this.setState({ loadingPhoto: null });
       }
-
       _this.props.onFinishedUploading(response);
     };
 
@@ -1122,7 +1123,6 @@ var UnsplashPicker = function (_React$Component) {
           photoRatio = _props.photoRatio,
           highlightColor = _props.highlightColor;
       var _state2 = this.state,
-          photos = _state2.photos,
           search = _state2.search,
           selectedPhoto = _state2.selectedPhoto,
           loadingPhoto = _state2.loadingPhoto,
@@ -1131,10 +1131,19 @@ var UnsplashPicker = function (_React$Component) {
           isAtBottomOfSearchResults = _state2.isAtBottomOfSearchResults,
           searchResultsWidth = _state2.searchResultsWidth,
           error = _state2.error;
-
+      var photos = this.state.photos;
 
       var searchResultWidth = searchResultsWidth ? Math.floor(searchResultsWidth / searchResultColumns) : 100;
       var searchResultHeight = searchResultWidth / photoRatio;
+
+      var displayPortraitPhotos = true;
+
+      if (displayPortraitPhotos) {
+        var portraits = photos.filter(function (photo) {
+          return photo.width < photo.height;
+        });
+        photos = portraits;
+      }
 
       return React.createElement(
         ReactIntersectionObserver,
@@ -1166,6 +1175,11 @@ var UnsplashPicker = function (_React$Component) {
             },
             "Unsplash"
           )
+        ),
+        React.createElement(
+          "div",
+          null,
+          React.createElement(DropDownSelector, null)
         ),
         React.createElement(
           "div",
@@ -1205,7 +1219,10 @@ var UnsplashPicker = function (_React$Component) {
         ),
         React.createElement(
           "div",
-          { className: "p-r f-1 border-radius", style: { marginTop: ".5em", overflow: "hidden" } },
+          {
+            className: "p-r f-1 border-radius",
+            style: { marginTop: ".5em", overflow: "hidden" }
+          },
           React.createElement(
             "div",
             {
@@ -1218,7 +1235,12 @@ var UnsplashPicker = function (_React$Component) {
             error ? React.createElement(
               "div",
               {
-                style: { textAlign: "center", marginTop: "3em", padding: "0 1em", fontSize: 13 }
+                style: {
+                  textAlign: "center",
+                  marginTop: "3em",
+                  padding: "0 1em",
+                  fontSize: 13
+                }
               },
               React.createElement(ErrorImage, null),
               React.createElement(
@@ -1318,6 +1340,7 @@ UnsplashPicker.propTypes = {
     width: number$3.isRequired,
     height: number$3.isRequired
   }),
+  displayPortraitPhotos: bool,
   Uploader: func$6,
   __debug_chaosMonkey: bool
 };
@@ -1341,7 +1364,11 @@ function CSSStyles() {
   });
 }
 
-SearchInputIcon.propTypes = { isLoading: bool.isRequired, hasError: bool.isRequired, style: object$4 };
+SearchInputIcon.propTypes = {
+  isLoading: bool.isRequired,
+  hasError: bool.isRequired,
+  style: object$4
+};
 function SearchInputIcon(_ref5) {
   var isLoading = _ref5.isLoading,
       hasError = _ref5.hasError,
@@ -1357,7 +1384,10 @@ function SearchInputIcon(_ref5) {
   );
 }
 
-AbsolutelyCentered.propTypes = { width: number$3.isRequired, height: number$3.isRequired };
+AbsolutelyCentered.propTypes = {
+  width: number$3.isRequired,
+  height: number$3.isRequired
+};
 function AbsolutelyCentered(_ref6) {
   var width = _ref6.width,
       height = _ref6.height,
@@ -1521,7 +1551,10 @@ function Photo(_ref8) {
     ),
     React.createElement(
       "div",
-      { className: "d-f", style: { padding: ".15em " + borderWidth + "px 0 " + borderWidth + "px" } },
+      {
+        className: "d-f",
+        style: { padding: ".15em " + borderWidth + "px 0 " + borderWidth + "px" }
+      },
       React.createElement(
         OverflowFadeLink,
         {
