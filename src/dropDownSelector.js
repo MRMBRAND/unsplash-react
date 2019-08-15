@@ -6,8 +6,9 @@ export default class DropDownSelector extends React.Component {
     onSelectionChange: PropTypes.func
   };
 
-  super(props) {
-      this.handleDropDown = this.handleDropDown.bind(this);
+  constructor(props) {
+    super(props);
+    this.handleDropDown = this.handleDropDown.bind(this);
     this.state = {
       header: "View All",
       openDropDown: false
@@ -18,16 +19,15 @@ export default class DropDownSelector extends React.Component {
     const next = !this.state.openDropDown;
     this.setState({
       openDropDown: next
-    }); 
+    });
   }
 
-  handleSelect(ref){
-      this.setState({
-          header: re,
-      })
+  handleSelect(ref) {
+    this.setState({
+      header: ref
+    });
   }
 
-  
   render() {
     return (
       <div
@@ -58,9 +58,15 @@ export default class DropDownSelector extends React.Component {
             zIndex: 1
           }}
         >
-          <p ref="all" onCLick={this.handleSelect(this.ref)}>View All</p>
-          <p ref="portrait"onCLick={this.handleSelect(this.ref)}>Portrait</p>
-          <p ref="landscape"onCLick={this.handleSelect(this.ref)}>Lanscape</p>
+          <p ref="all" onCLick={this.handleSelect(this.ref)}>
+            View All
+          </p>
+          <p ref="portrait" onCLick={this.handleSelect(this.ref)}>
+            Portrait
+          </p>
+          <p ref="landscape" onCLick={this.handleSelect(this.ref)}>
+            Lanscape
+          </p>
         </div>
       </div>
     );
