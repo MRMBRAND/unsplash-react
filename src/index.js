@@ -337,7 +337,7 @@ export default class UnsplashPicker extends React.Component {
         <div className="p-r f-1 border-radius" style={{ marginTop: ".5em", overflow: "hidden" }}>
           <div
             className="h-f"
-            style={{ overflowY: "scroll" }}
+            style={{ overflowY: "scroll", flexDirection: 'row', flexWrap: 'wrap' }}
             ref={element => (this.searchResults = element)}
           >
             {error ? (
